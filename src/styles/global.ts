@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle `
+export const GlobalStyle = createGlobalStyle ` //esse createGlobalStyle é uma função do styled components q cria um estilo global para a aplicação
     :root {
         --red: #E52E4D;
         --blue: #5429CC;
