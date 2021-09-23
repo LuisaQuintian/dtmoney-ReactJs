@@ -1,6 +1,9 @@
+import { useState } from "react"
 import Modal from "react-modal"
 import closeImg from '../../assets/close.svg'
-import { Container } from "./style"
+import incomeImg from '../../assets/income.svg'
+import outcomeImg from '../../assets/outcome.svg'
+import { Container, TransactionTypeContainer, RadioBox } from "./style"
 
 interface NewTransactionModalProps {
     isOpen: boolean;
@@ -8,7 +11,10 @@ interface NewTransactionModalProps {
 }
 
 export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModalProps) {
-    return(
+  
+  const [type, setType] = useState('deposit')
+
+  return(
         <Modal 
             isOpen={isOpen}//isOpen é uma required prop q vem junto com o pacoote react-modal, serve para abrir
             onRequestClose={onRequestClose}//O onRequestClose serve para fechar o modal com esc ou clicando fora dele
@@ -27,6 +33,29 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
             
             <input  placeholder="Título"/>
             <input type="number" placeholder="Valor" />
+
+            <TransactionTypeContainer>
+            <RadioBox
+              type="button"
+              onClick={() => {setType('deposit')}}
+              isActive={type === 'deposit'} //propriedade criada por nós, podia ser qualquer nome
+              activeColor="green"
+            >
+              <img src={incomeImg} alt="Entrada" />
+              <span>Entrada</span>
+            </RadioBox>
+
+            <RadioBox
+              type="button"
+              onClick={() => {setType('withdraw')}}
+              isActive={type === 'withdraw'}
+              activeColor="red"
+            >
+              <img src={outcomeImg} alt="Saída" />
+              <span>Saída</span>
+            </RadioBox>
+            </TransactionTypeContainer> 
+
             <input placeholder="Categoria" />
             <button type="submit">Cadastrar</button>
           </Container>
